@@ -1,0 +1,62 @@
+<main>
+  <!-- Hero -->
+  <section class="section-padding bg-gradient-to-b from-background to-secondary/30">
+    <div class="container-custom">
+      <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+
+        <!-- Texte -->
+        <div class="flex-1 text-center lg:text-left">
+          <h1 class="mb-6">
+            Bonjour, je suis <span class="text-primary">Oumar Khousainov</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-muted-foreground mb-4 font-medium">
+            Développeur Web Frontend
+          </p>
+          <p class="text-lg text-muted-foreground mb-8 max-w-2xl">
+            Passionné par le développement d'applications web modernes et performantes,
+            je crée des expériences utilisateur intuitives avec Angular et les dernières technologies web.
+          </p>
+
+          <!-- CTA -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <a routerLink="/skills"
+               class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md bg-primary text-primary-foreground hover:opacity-90 transition">
+              <span class="sr-only">Aller à</span>
+              Mes compétences
+              <span aria-hidden="true" class="ml-1">→</span>
+            </a>
+            <a routerLink="/projects"
+               class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-md border border-border text-foreground hover:bg-secondary transition">
+              Mes réalisations
+              <span aria-hidden="true" class="ml-1">→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Photo -->
+        <div class="flex-shrink-0">
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-tr from-primary to-accent opacity-20 rounded-full blur-3xl"></div>
+            <img src="/assets/profile-photo.jpg"
+                 alt="Photo de profil — Oumar Khousainov"
+                 class="relative w-64 h-64 md:w-80 md:h-80 rounded-full object-cover shadow-2xl ring-4 ring-primary/10">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro courte -->
+  <section class="section-padding-sm">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="mb-6">Un développeur passionné</h2>
+        <p class="text-lg text-muted-foreground leading-relaxed">
+          Je me spécialise dans la création d'applications frontend robustes et élégantes.
+          Mon approche combine expertise technique, qualité et accessibilité.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>

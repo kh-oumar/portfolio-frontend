@@ -1,0 +1,52 @@
+<main>
+  <section class="section-padding">
+    <div class="container-custom">
+      <!-- Header -->
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <h1 class="mb-6">Compétences</h1>
+        <p class="text-xl text-muted-foreground">
+          Un aperçu de mes compétences techniques et humaines, avec une échelle claire.
+        </p>
+      </div>
+
+      <!-- Filtres -->
+      <div class="flex flex-wrap gap-3 justify-center mb-12">
+        <button
+          class="px-4 py-2 rounded-md border"
+          [class.bg-primary]="(filter() === 'all')"
+          [class.text-primary-foreground]="(filter() === 'all')"
+          (click)="setFilter('all')">
+          Toutes
+        </button>
+        <button
+          class="px-4 py-2 rounded-md border"
+          [class.bg-primary]="(filter() === 'tech')"
+          [class.text-primary-foreground]="(filter() === 'tech')"
+          (click)="setFilter('tech')">
+          Techniques
+        </button>
+        <button
+          class="px-4 py-2 rounded-md border"
+          [class.bg-primary]="(filter() === 'human')"
+          [class.text-primary-foreground]="(filter() === 'human')"
+          (click)="setFilter('human')">
+          Humaines
+        </button>
+      </div>
+
+      <!-- Grille -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        @for (s of filtered(); track s.id) {
+          <app-skill-card [id]="s.id" [name]="s.name" [category]="s.category" [level]="s.level" />
+        }
+      </div>
+
+      <!-- Légende -->
+      <div class="mt-12 max-w-3xl mx-auto text-center">
+        <p class="text-sm text-muted-foreground">
+          Cliquez sur une compétence pour voir une fiche détaillée avec définition, preuves concrètes, autocritique et évolution.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>

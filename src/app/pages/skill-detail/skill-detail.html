@@ -1,0 +1,120 @@
+<main>
+  <section class="section-padding">
+    <div class="container-custom max-w-4xl">
+      <!-- Bouton retour -->
+      <a routerLink="/skills" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border mb-8">
+        <lucide-icon name="arrow-left" class="h-4 w-4" aria-hidden="true"></lucide-icon>
+        Retour aux compétences
+      </a>
+
+      @if (!skill) {
+        <div class="text-center">
+          <h1 class="mb-4">Compétence non trouvée</h1>
+          <a routerLink="/skills" class="underline text-primary">Voir la liste</a>
+        </div>
+      } @else {
+        <!-- En-tête -->
+        <div class="mb-12">
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <h1 class="m-0">{{ skill!.name }}</h1>
+            <span class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium"
+                  [ngClass]="badgeClass(skill!.category)">
+              {{ skill!.category === 'tech' ? 'Technique' : 'Humaine' }}
+            </span>
+          </div>
+
+          <!-- Niveau -->
+          <div class="flex items-center gap-4">
+            <span class="text-muted-foreground">Niveau d'expertise</span>
+            <div class="flex-1 max-w-xs">
+              <div class="w-full bg-secondary rounded-full h-3">
+                <div class="bg-primary h-3 rounded-full transition-all"
+                     [style.width.%]="skill!.level * 10"
+                     role="progressbar"
+                     [attr.aria-valuenow]="skill!.level" aria-valuemin="0" aria-valuemax="10"></div>
+              </div>
+            </div>
+            <span class="font-semibold text-lg">{{ skill!.level }}/10</span>
+          </div>
+        </div>
+
+        <!-- Définition & Contexte -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="book-open" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Définition & Contexte</h2>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Définition</h4>
+                <p class="text-muted-foreground">{{ skill!.definition }}</p>
+              </div>
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Mon contexte d'utilisation</h4>
+                <p class="text-muted-foreground">{{ skill!.context }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preuves -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="circle-check" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Preuves & Réalisations</h2>
+            </div>
+            <ul class="space-y-3">
+              @for (p of skill!.proofs; track p) {
+                <li class="flex gap-3">
+                  <span class="text-primary mt-1">•</span>
+                  <span class="text-muted-foreground">{{ p }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+
+        <!-- Regard critique -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="circle-alert" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Regard critique</h2>
+            </div>
+            <p class="text-muted-foreground">{{ skill!.critique }}</p>
+          </div>
+        </div>
+
+        <!-- Évolution -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="trending-up" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Évolution & Objectifs</h2>
+            </div>
+            <p class="text-muted-foreground">{{ skill!.evolution }}</p>
+          </div>
+        </div>
+
+        <!-- Réalisations associées -->
+        @if (skill!.relatedProjects?.length) {
+          <div class="border rounded-2xl bg-card">
+            <div class="p-6">
+              <h2 class="text-xl mb-3">Réalisations associées</h2>
+              <div class="flex flex-wrap gap-2">
+                @for (pid of skill!.relatedProjects!; track pid) {
+                  <a [routerLink]="['/projects', pid]"
+                     class="px-3 py-1 rounded-full border hover:bg-primary/10 cursor-pointer text-sm">
+                    Voir le projet →
+                  </a>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </section>
+</main>

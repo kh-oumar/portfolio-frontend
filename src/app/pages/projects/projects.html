@@ -1,0 +1,19 @@
+<main>
+  <section class="section-padding">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <h1 class="mb-6">Réalisations</h1>
+        <p class="text-xl text-muted-foreground">
+          Une sélection de projets significatifs illustrant expertise et conduite de projets.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        @for (p of projects; track p.id) {
+          <app-project-card [id]="p.id" [title]="p.title" [description]="p.description"
+                            [tags]="p.tags" [year]="p.year" />
+        }
+      </div>
+    </div>
+  </section>
+</main>

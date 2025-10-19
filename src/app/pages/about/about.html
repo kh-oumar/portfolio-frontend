@@ -1,0 +1,30 @@
+<main>
+  <section class="section-padding bg-gradient-to-b from-background to-secondary/30">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center mb-16">
+        <h1 class="mb-6">À propos</h1>
+        <p class="text-xl text-muted-foreground">
+          Développeur passionné par la création d'expériences web performantes et accessibles.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        @for (s of sections; track s.title) {
+          <div class="border rounded-2xl bg-card hover:shadow-lg transition-shadow">
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="p-2 bg-primary/10 rounded-lg">
+                  <lucide-icon [name]="s.icon" class="h-6 w-6 text-primary" aria-hidden="true"></lucide-icon>
+                </div>
+                <h2 class="text-xl m-0">{{ s.title }}</h2>
+              </div>
+              <p class="text-muted-foreground leading-relaxed">
+                {{ s.content }}
+              </p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+</main>

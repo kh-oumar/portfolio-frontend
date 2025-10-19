@@ -1,0 +1,139 @@
+<main>
+  <section class="section-padding">
+    <div class="container-custom max-w-5xl">
+      <a routerLink="/projects" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border mb-8">
+        <lucide-icon name="arrow-left" class="h-4 w-4" aria-hidden="true"></lucide-icon>
+        Retour aux réalisations
+      </a>
+
+      @if (!project) {
+        <div class="text-center">
+          <h1 class="mb-4">Projet non trouvé</h1>
+          <a routerLink="/projects" class="underline text-primary">Voir la liste</a>
+        </div>
+      } @else {
+        <!-- Header -->
+        <div class="mb-12">
+          <div class="flex items-start justify-between gap-4 mb-4 flex-wrap">
+            <h1 class="m-0">{{ project!.title }}</h1>
+            <span class="text-lg font-medium text-muted-foreground">{{ project!.year }}</span>
+          </div>
+          <p class="text-xl text-muted-foreground mb-6">{{ project!.description }}</p>
+          <div class="flex flex-wrap gap-2">
+            @for (tag of tags(project!); track tag) {
+              <span class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium
+                            bg-accent/10 text-accent border-accent/20">{{ tag }}</span>
+            }
+          </div>
+        </div>
+
+        <!-- Présentation -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="layers" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Présentation du projet</h2>
+            </div>
+            <p class="text-muted-foreground">{{ project!.presentation }}</p>
+          </div>
+        </div>
+
+        <!-- Objectifs / Contexte / Enjeux / Risques -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="target" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Objectifs & Contexte</h2>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Contexte</h4>
+                <p class="text-muted-foreground">{{ project!.objectives.context }}</p>
+              </div>
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Objectifs</h4>
+                <p class="text-muted-foreground">{{ project!.objectives.goals }}</p>
+              </div>
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Enjeux & Défis</h4>
+                <p class="text-muted-foreground">{{ project!.objectives.challenges }}</p>
+              </div>
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Risques identifiés</h4>
+                <p class="text-muted-foreground">{{ project!.objectives.risks }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Étapes -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="settings" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Ce que j'ai fait — Étapes clés</h2>
+            </div>
+            <ol class="space-y-3">
+              @for (step of project!.steps; track step) {
+                <li class="flex gap-3">
+                  <span class="font-semibold text-primary min-w-[24px]">{{ $index + 1 }}.</span>
+                  <span class="text-muted-foreground">{{ step }}</span>
+                </li>
+              }
+            </ol>
+          </div>
+        </div>
+
+        <!-- Acteurs -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="users" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Acteurs & Interactions</h2>
+            </div>
+            <p class="text-muted-foreground">{{ project!.actors }}</p>
+          </div>
+        </div>
+
+        <!-- Résultats -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="trending-up" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Résultats</h2>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Apports personnels</h4>
+                <p class="text-muted-foreground">{{ project!.results.personal }}</p>
+              </div>
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Impact pour l'entreprise</h4>
+                <p class="text-muted-foreground">{{ project!.results.business }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lendemains -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <h2 class="text-xl m-0">Les lendemains du projet</h2>
+            <p class="text-muted-foreground">{{ project!.future }}</p>
+          </div>
+        </div>
+
+        <!-- Regard critique -->
+        <div class="border rounded-2xl bg-card">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="eye" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Regard critique</h2>
+            </div>
+            <p class="text-muted-foreground">{{ project!.critique }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+</main>

@@ -1,0 +1,75 @@
+<main>
+  <section class="section-padding">
+    <div class="container-custom">
+      <!-- Header -->
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <h1 class="mb-6">Parcours</h1>
+        <p class="text-xl text-muted-foreground">
+          Mon parcours professionnel et académique, de mes débuts à aujourd'hui.
+        </p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="max-w-4xl mx-auto">
+        <div class="relative">
+          <!-- Ligne verticale desktop -->
+          <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-border hidden md:block" aria-hidden="true"></div>
+
+          <div class="space-y-8">
+            @for (item of items; track item.title) {
+              <div class="relative">
+                <!-- Icône -->
+                <div
+                  class="absolute left-0 md:left-5 top-0 w-14 h-14 md:w-12 md:h-12
+                         bg-primary rounded-full flex items-center justify-center shadow-lg z-10">
+                  <lucide-icon [name]="iconName(item.type)"
+                               class="h-6 w-6 md:h-5 md:w-5 text-primary-foreground"
+                               aria-hidden="true"></lucide-icon>
+                </div>
+
+                <!-- Carte -->
+                <div class="ml-20 md:ml-24">
+                  <div class="border rounded-2xl bg-card hover:shadow-lg transition-shadow">
+                    <div class="p-6">
+                      <div class="flex items-start justify-between gap-4 mb-3 flex-wrap">
+                        <div class="flex-1">
+                          <div class="flex items-center gap-3 mb-2">
+                            <h3 class="text-xl font-semibold m-0">{{ item.title }}</h3>
+                            <span class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium">
+                              {{ typeLabel(item.type) }}
+                            </span>
+                          </div>
+                          <p class="text-muted-foreground font-medium">
+                            {{ item.organization }}
+                          </p>
+                        </div>
+                        <span class="text-sm font-medium text-primary whitespace-nowrap">
+                          {{ item.date }}
+                        </span>
+                      </div>
+
+                      <p class="text-muted-foreground mb-4">
+                        {{ item.description }}
+                      </p>
+
+                      @if (item.tags?.length) {
+                        <div class="flex flex-wrap gap-2">
+                          @for (t of item.tags; track t) {
+                            <span class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium
+                                         bg-accent/10 text-accent border-accent/20">
+                              {{ t }}
+                            </span>
+                          }
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
