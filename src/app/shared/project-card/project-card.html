@@ -1,0 +1,35 @@
+<div class="glass-card hover-lift group h-full">
+  <div class="p-6 md:p-8 flex flex-col h-full">
+    <div class="flex items-start justify-between gap-4">
+      <div class="flex-1">
+        <div class="flex items-center gap-3 mb-2">
+          @if (logo) {
+            <div class="inline-flex p-3 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl">
+              <img [src]="logo" [alt]="title" class="max-w-8 max-h-8 object-contain" />
+            </div>
+          }
+          <h3 class="text-xl font-semibold gradient-text-subtle m-0">
+            {{ title }}
+          </h3>
+        </div>
+        <p class="text-base text-muted-foreground leading-relaxed">{{ description }}</p>
+      </div>
+      <span class="text-xs font-medium px-3 py-1 rounded-full bg-secondary text-secondary-foreground">
+        {{ year }}
+      </span>
+    </div>
+
+    <div class="flex flex-wrap gap-2 my-4">
+      @for (t of tags; track t) {
+        <span class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium
+                      bg-primary/10 text-primary border-primary/20 transition-all hover:bg-primary/20">{{ t }}</span>
+      }
+    </div>
+
+    <a [routerLink]="['/projects', id]"
+       class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all">
+      Voir les détails
+      <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+    </a>
+  </div>
+</div>

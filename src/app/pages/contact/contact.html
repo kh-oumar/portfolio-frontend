@@ -1,0 +1,130 @@
+<main>
+  <section class="section-padding">
+    <div class="container-custom">
+      <!-- Header -->
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <h1 class="mb-6">Contact</h1>
+        <p class="text-xl text-muted-foreground">
+          Une question, un projet ou juste envie d'échanger ? Écrivez-moi.
+        </p>
+      </div>
+
+      <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Coordonnées (statique) -->
+        <div class="lg:col-span-1 space-y-6">
+          <div class="border rounded-2xl bg-card">
+            <div class="p-6 space-y-4">
+              <div class="flex items-start gap-3">
+                <div class="p-2 bg-primary/10 rounded-lg">
+                  <lucide-icon name="mail" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+                </div>
+                <div class="flex-1">
+                  <p class="text-sm font-medium mb-1">Email</p>
+                  <a href="mailto:oumar.khousainov@gmail.com"
+                     class="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    oumar.khousainov@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="p-2 bg-primary/10 rounded-lg">
+                  <lucide-icon name="phone" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+                </div>
+                <div class="flex-1">
+                  <p class="text-sm font-medium mb-1">Téléphone</p>
+                  <a href="tel:+33751107357"
+                     class="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    +33 7 51 10 73 57
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="p-2 bg-primary/10 rounded-lg">
+                  <lucide-icon name="map-pin" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+                </div>
+                <div class="flex-1">
+                  <p class="text-sm font-medium mb-1">Localisation</p>
+                  <p class="text-sm text-muted-foreground">Strasbourg, France</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border rounded-2xl bg-card">
+            <div class="p-6">
+              <p class="text-sm text-muted-foreground">
+                <strong class="text-foreground">Disponibilité :</strong><br />
+                Je réponds généralement sous 24h en semaine.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulaire -->
+        <div class="lg:col-span-2">
+          <div class="border rounded-2xl bg-card">
+            <div class="p-6">
+              <!-- Alertes -->
+              @if (success()) {
+                <div class="mb-4 rounded-md bg-green-50 px-4 py-3 text-sm text-green-900 border border-green-200">
+                  {{ success() }}
+                </div>
+              }
+              @if (error()) {
+                <div class="mb-4 rounded-md bg-red-50 px-4 py-3 text-sm text-red-900 border border-red-200">
+                  {{ error() }}
+                </div>
+              }
+
+              <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6" novalidate>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <label for="name">Nom <span class="text-destructive">*</span></label>
+                    <input id="name" type="text" formControlName="name" placeholder="Votre nom"
+                           class="w-full rounded-md border px-3 py-2 bg-background" />
+                    @if (hasError('name','required')) { <p class="text-sm text-destructive">Nom requis.</p> }
+                    @if (hasError('name','whitespace')) { <p class="text-sm text-destructive">Le nom ne peut pas être vide.</p> }
+                    @if (hasError('name','minlength')) { <p class="text-sm text-destructive">Min. 5 caractères.</p> }
+                  </div>
+
+                  <div class="space-y-2">
+                    <label for="email">Email <span class="text-destructive">*</span></label>
+                    <input id="email" type="email" formControlName="email" placeholder="votre.email@example.com"
+                           class="w-full rounded-md border px-3 py-2 bg-background" />
+                    @if (hasError('email','required')) { <p class="text-sm text-destructive">Email requis.</p> }
+                    @if (hasError('email','whitespace')) { <p class="text-sm text-destructive">L'email ne peut pas être vide.</p> }
+                    @if (hasError('email','email')) { <p class="text-sm text-destructive">Email invalide.</p> }
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <label for="subject">Sujet</label>
+                  <input id="subject" type="text" formControlName="subject" placeholder="Objet de votre message"
+                         class="w-full rounded-md border px-3 py-2 bg-background" />
+                </div>
+
+                <div class="space-y-2">
+                  <label for="message">Message <span class="text-destructive">*</span></label>
+                  <textarea id="message" formControlName="message" rows="6" placeholder="Votre message..."
+                            class="w-full rounded-md border px-3 py-2 bg-background"></textarea>
+                  @if (hasError('message','required')) { <p class="text-sm text-destructive">Message requis.</p> }
+                  @if (hasError('message','whitespace')) { <p class="text-sm text-destructive">Le message ne peut pas être vide.</p> }
+                  @if (hasError('message','minlength')) { <p class="text-sm text-destructive">Min. 5 caractères.</p> }
+                </div>
+
+                <button type="submit"
+                        class="px-5 py-3 rounded-md bg-primary text-primary-foreground hover:opacity-90 transition disabled:opacity-60"
+                        [disabled]="pending()">
+                  @if (pending()) { <span>Envoi…</span> } @else { <span>Envoyer le message</span> }
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>

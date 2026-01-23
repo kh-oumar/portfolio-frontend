@@ -1,0 +1,242 @@
+// Animations d'entrée
+main {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Stagger des sections
+.glass-card {
+  animation: fadeIn 0.5s ease-out backwards;
+
+  &:nth-child(1) { animation-delay: 0.08s; }
+  &:nth-child(2) { animation-delay: 0.16s; }
+  &:nth-child(3) { animation-delay: 0.24s; }
+  &:nth-child(4) { animation-delay: 0.32s; }
+  &:nth-child(5) { animation-delay: 0.40s; }
+  &:nth-child(6) { animation-delay: 0.48s; }
+  &:nth-child(7) { animation-delay: 0.56s; }
+  &:nth-child(8) { animation-delay: 0.64s; }
+  &:nth-child(9) { animation-delay: 0.72s; }
+  &:nth-child(10) { animation-delay: 0.80s; }
+  &:nth-child(11) { animation-delay: 0.88s; }
+  &:nth-child(12) { animation-delay: 0.96s; }
+}
+
+// Hover lift amélioré
+.glass-card.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.12),
+      0 0 30px hsl(var(--primary) / 0.08);
+  }
+}
+
+// Bordure gauche animée avec gradient
+.border-gradient {
+  position: relative;
+  border-left: 4px solid transparent;
+  background: linear-gradient(to bottom, hsl(var(--primary)), hsl(var(--accent))) left / 4px 100% no-repeat;
+  background-clip: border-box;
+}
+
+// Puce numérotée avec pulse
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px hsl(var(--primary) / 0);
+  }
+}
+
+.border-l-4 .absolute.-left-3 {
+  animation: pulse 2s infinite;
+}
+
+// Tags hover scale
+span[class*="rounded-full"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+// Logo rotation et scale
+.inline-flex img {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: rotate(5deg) scale(1.1);
+  }
+}
+
+// Gradient text
+.gradient-text {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-subtle {
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.9), hsl(var(--accent) / 0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Transitions pour les sections
+.glass-card > div {
+  transition: all 0.3s ease;
+}
+
+// Hover sur les étapes
+.space-y-3 > div {
+  transition: all 0.3s ease;
+}
+
+// Hover sur les cartes de compétences
+a[class*="glass-card"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.1),
+      0 0 20px hsl(var(--primary) / 0.2);
+  }
+
+  img {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: rotate(12deg);
+  }
+}
+
+// Animations pour les réalisations majeures
+.border-l-4 {
+  transition: all 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 0;
+    width: 4px;
+    height: 0;
+    background: linear-gradient(to bottom, hsl(var(--primary)), hsl(var(--accent)));
+    transition: height 0.6s ease-out;
+  }
+
+  &:hover::before {
+    height: 100%;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .glass-card {
+    padding: 1.5rem !important;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  // Réduire l'espacement sur mobile
+  .space-y-10 > * + * {
+    margin-top: 2rem !important;
+  }
+
+  // Réduire le padding des sous-cartes
+  .glass-card .glass-card {
+    padding: 1rem !important;
+  }
+}
+
+// Amélioration des transitions pour les bordures
+.border-l-4 {
+  border-image: linear-gradient(to bottom, hsl(var(--primary)), hsl(var(--accent))) 1;
+}
+
+// Hover sur les sous-sections d'objectifs
+.grid > .glass-card {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateX(4px);
+    box-shadow: -4px 0 12px hsl(var(--primary) / 0.1);
+  }
+}
+
+// Animation pour les listes à puces dans les réalisations
+ul li {
+  animation: slideInLeft 0.4s ease-out backwards;
+
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.05}s;
+    }
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Amélioration du focus pour l'accessibilité
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+// Hover sur les cartes de résultats
+.grid.md\\:grid-cols-2 > .glass-card {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}

@@ -1,0 +1,38 @@
+// Enhanced hover effects for project cards
+:host {
+  display: block;
+  height: 100%;
+}
+
+// Override hover-lift for more dramatic effect on project cards
+.glass-card {
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.15),
+      0 0 20px rgba(6, 182, 212, 0.1);
+  }
+}
+
+// Logo container animation
+.inline-flex {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// Smooth transitions for all interactive elements
+a, span {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .glass-card {
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+}

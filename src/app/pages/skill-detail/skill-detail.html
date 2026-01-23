@@ -1,0 +1,175 @@
+<main>
+  <section class="section-padding">
+    <div class="container-custom max-w-4xl">
+      <!-- Bouton retour -->
+      <a routerLink="/skills" class="inline-flex items-center gap-2 px-4 py-2 rounded-md border mb-8">
+        <lucide-icon name="arrow-left" class="h-4 w-4" aria-hidden="true"></lucide-icon>
+        Retour aux compétences
+      </a>
+
+      @if (!skill) {
+        <div class="text-center">
+          <h1 class="mb-4">Compétence non trouvée</h1>
+          <a routerLink="/skills" class="underline text-primary">Voir la liste</a>
+        </div>
+      } @else {
+        <!-- En-tête -->
+        <div class="mb-12">
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <h1 class="m-0">{{ skill!.name }}</h1>
+            <span class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium"
+                  [ngClass]="badgeClass(skill!.category)">
+              {{ skill!.category === 'tech' ? 'Technique' : 'Humaine' }}
+            </span>
+          </div>
+
+          <!-- Niveau -->
+          <div class="flex items-center gap-4">
+            <span class="text-muted-foreground">Niveau d'expertise</span>
+            <div class="flex-1 max-w-xs">
+              <div class="w-full bg-secondary rounded-full h-3">
+                <div class="bg-primary h-3 rounded-full transition-all"
+                     [style.width.%]="skill!.level * 10"
+                     role="progressbar"
+                     [attr.aria-valuenow]="skill!.level" aria-valuemin="0" aria-valuemax="10"></div>
+              </div>
+            </div>
+            <span class="font-semibold text-lg">{{ skill!.level }}/10</span>
+          </div>
+        </div>
+
+        <!-- Définition & Contexte -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="book-open" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Définition & Contexte</h2>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Définition</h4>
+                <p class="text-muted-foreground">{{ skill!.definition }}</p>
+              </div>
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Mon contexte d'utilisation</h4>
+                <p class="text-muted-foreground">{{ skill!.context }}</p>
+              </div>
+              @if (skill!.actuality) {
+                <div>
+                  <h4 class="font-medium mb-2 text-foreground">Actualité & Tendances</h4>
+                  <p class="text-muted-foreground">{{ skill!.actuality }}</p>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Mes Éléments de Preuve -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="circle-check" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Mes Éléments de Preuve</h2>
+            </div>
+            <div class="space-y-6">
+              @for (anecdote of skill!.anecdotes; track anecdote.title) {
+                <div class="border-l-4 border-primary pl-4">
+                  <h3 class="font-semibold text-lg mb-2">{{ anecdote.title }}</h3>
+                  <div class="space-y-2">
+                    <div>
+                      <span class="font-medium text-sm">Contexte & Mise en œuvre:</span>
+                      <p class="text-muted-foreground mt-1">{{ anecdote.description }}</p>
+                    </div>
+                    <div>
+                      <span class="font-medium text-sm">Résultat obtenu:</span>
+                      <p class="text-muted-foreground mt-1">{{ anecdote.result }}</p>
+                    </div>
+                    <div>
+                      <span class="font-medium text-sm">Ma valeur ajoutée:</span>
+                      <p class="text-muted-foreground mt-1">{{ anecdote.valueAdded }}</p>
+                    </div>
+                    <a [routerLink]="['/projects', anecdote.projectId]"
+                       class="inline-flex items-center gap-2 text-primary hover:underline text-sm mt-2">
+                      <lucide-icon name="arrow-right" class="h-4 w-4" aria-hidden="true"></lucide-icon>
+                      Voir le projet {{ getProjectName(anecdote.projectId) }}
+                    </a>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Mon Autocritique -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="circle-alert" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Mon Autocritique</h2>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Niveau de maîtrise</h4>
+                <p class="text-muted-foreground">{{ skill!.critique.mastery }}</p>
+              </div>
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Importance dans mon profil</h4>
+                <p class="text-muted-foreground">{{ skill!.critique.importance }}</p>
+              </div>
+              @if (skill!.critique.acquisition) {
+                <div>
+                  <h4 class="font-medium mb-2 text-foreground">Vitesse d'acquisition</h4>
+                  <p class="text-muted-foreground">{{ skill!.critique.acquisition }}</p>
+                </div>
+              }
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Mes conseils et recul</h4>
+                <p class="text-muted-foreground">{{ skill!.critique.advice }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mon Évolution -->
+        <div class="border rounded-2xl bg-card mb-6">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <lucide-icon name="trending-up" class="h-5 w-5 text-primary" aria-hidden="true"></lucide-icon>
+              <h2 class="text-xl m-0">Mon Évolution dans cette Compétence</h2>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Projet professionnel & objectifs</h4>
+                <p class="text-muted-foreground">{{ skill!.evolution.goals }}</p>
+              </div>
+              <div>
+                <h4 class="font-medium mb-2 text-foreground">Formations en cours ou à venir</h4>
+                <p class="text-muted-foreground">{{ skill!.evolution.training }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Réalisations associées -->
+        @if (skill!.relatedProjects.length) {
+          <div class="border rounded-2xl bg-card">
+            <div class="p-6">
+              <h2 class="text-xl mb-3">Réalisations associées</h2>
+              <div class="flex flex-wrap gap-2">
+                @for (pid of skill!.relatedProjects!; track pid) {
+                  <a [routerLink]="['/projects', pid]"
+                     class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border hover:bg-primary/10 cursor-pointer text-sm transition-colors">
+                    @if (getProjectLogo(pid)) {
+                      <img [src]="getProjectLogo(pid)" [alt]="getProjectName(pid)" class="w-4 h-4 object-contain" />
+                    }
+                    <span>{{ getProjectName(pid) }}</span>
+                  </a>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </section>
+</main>

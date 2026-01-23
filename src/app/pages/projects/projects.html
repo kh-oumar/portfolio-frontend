@@ -1,0 +1,21 @@
+<main>
+  <section class="section-padding-sm bg-gradient-to-b from-background to-secondary/30">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <h1 class="gradient-text text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+          Réalisations
+        </h1>
+        <p class="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+          Une sélection de projets significatifs illustrant mon expertise technique et ma capacité à conduire des projets innovants.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        @for (p of projects; track p.id) {
+          <app-project-card [id]="p.id" [title]="p.title" [description]="p.description"
+                            [tags]="p.tags" [year]="p.year" [logo]="p.logo" />
+        }
+      </div>
+    </div>
+  </section>
+</main>
